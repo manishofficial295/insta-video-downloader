@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Video Downloader</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        background-size: 300% 300%;
+        animation: bgAnimation 10s ease infinite;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes bgAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .glass-box {
+        width: 90%;
+        max-width: 420px;
+        padding: 30px 25px;
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    .logo {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        margin: 0 0 20px;
+        font-size: 28px;
+        color: white;
+        font-weight: 700;
+    }
+
+    input {
+        width: 90%;
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        margin-top: 10px;
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    button {
+        width: 95%;
+        padding: 14px;
+        margin-top: 18px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        background: #0059ff;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        box-shadow: 0 0 15px rgba(0, 136, 255, 0.8);
+    }
+
+    button:hover {
+        background: #003cbf;
+        box-shadow: 0 0 25px rgba(0, 150, 255, 1);
+    }
+
+    /* Loader Animation */
+    .loader {
+        margin: 20px auto;
+        border: 6px solid rgba(255,255,255,0.3);
+        border-top: 6px solid white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    #result {
+        margin-top: 20px;
+        color: white;
+    }
+
+    .footer {
+        margin-top: 12px;
+        color: white;
+        font-size: 14px;
+        opacity: 0.9;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="glass-box">
+
+    <!-- Custom Logo -->
+    <img class="logo" src="https://cdn-icons-png.flaticon.com/512/87/87390.png">
+
+    <h2>Instagram Downloader</h2>
+
+    <input type="text" id="insta" placeholder="Enter Instagram Username or Post Link">
+    <button onclick="process()">Download</button>
+
+    <!-- Loader Animation -->
+    <div class="loader" id="loader"></div>
+
+    <div id="result"></div>
+
+    <div class="footer">Made by Manish Saini ❤️</div>
+
+</div>
+
+<script>
+function process() {
+    let input = document.getElementById("insta").value.trim();
+    let loader = document.getElementById("loader");
+
+    if (input === "") {
+        alert("Please enter a username or link!");
+        return;
+    }
+
+    loader.style.display = "block";
+    document.getElementById("result").innerHTML = "";
+
+    let apiURL = "";
+
+    if (input.startsWith("@")) {
+        input = input.replace("@", "");
+        apiURL = "https://saveig.app/api/?q=" + input;
+    } else if (!input.includes("instagram.com")) {
+        apiURL = "https://saveig.app/api/?q=" + input;
+    } else {
+        apiURL = "https://saveig.app/api/?q=" + encodeURIComponent(input);
+    }
+
+    setTimeout(() => {
+        loader.style.display = "none";
+        document.getElementById("result").innerHTML = `
+            <iframe src="${apiURL}" width="100%" height="500px" style="border:none;"></iframe>
+        `;
+    }, 1200);
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Video Downloader</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        background-size: 300% 300%;
+        animation: bgAnimation 10s ease infinite;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes bgAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .glass-box {
+        width: 90%;
+        max-width: 420px;
+        padding: 30px 25px;
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    .logo {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        margin: 0 0 20px;
+        font-size: 28px;
+        color: white;
+        font-weight: 700;
+    }
+
+    input {
+        width: 90%;
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        margin-top: 10px;
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    button {
+        width: 95%;
+        padding: 14px;
+        margin-top: 18px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        background: #0059ff;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        box-shadow: 0 0 15px rgba(0, 136, 255, 0.8);
+    }
+
+    button:hover {
+        background: #003cbf;
+        box-shadow: 0 0 25px rgba(0, 150, 255, 1);
+    }
+
+    /* Loader Animation */
+    .loader {
+        margin: 20px auto;
+        border: 6px solid rgba(255,255,255,0.3);
+        border-top: 6px solid white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    #result {
+        margin-top: 20px;
+        color: white;
+    }
+
+    .footer {
+        margin-top: 12px;
+        color: white;
+        font-size: 14px;
+        opacity: 0.9;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="glass-box">
+
+    <!-- Custom Logo -->
+    <img class="logo" src="https://cdn-icons-png.flaticon.com/512/87/87390.png">
+
+    <h2>Instagram Downloader</h2>
+
+    <input type="text" id="insta" placeholder="Enter Instagram Username or Post Link">
+    <button onclick="process()">Download</button>
+
+    <!-- Loader Animation -->
+    <div class="loader" id="loader"></div>
+
+    <div id="result"></div>
+
+    <div class="footer">Made by Manish Saini ❤️</div>
+
+</div>
+
+<script>
+function process() {
+    let input = document.getElementById("insta").value.trim();
+    let loader = document.getElementById("loader");
+
+    if (input === "") {
+        alert("Please enter a username or link!");
+        return;
+    }
+
+    loader.style.display = "block";
+    document.getElementById("result").innerHTML = "";
+
+    let apiURL = "";
+
+    if (input.startsWith("@")) {
+        input = input.replace("@", "");
+        apiURL = "https://saveig.app/api/?q=" + input;
+    } else if (!input.includes("instagram.com")) {
+        apiURL = "https://saveig.app/api/?q=" + input;
+    } else {
+        apiURL = "https://saveig.app/api/?q=" + encodeURIComponent(input);
+    }
+
+    setTimeout(() => {
+        loader.style.display = "none";
+        document.getElementById("result").innerHTML = `
+            <iframe src="${apiURL}" width="100%" height="500px" style="border:none;"></iframe>
+        `;
+    }, 1200);
+}
+</script>
+
+</body>
+</html>
