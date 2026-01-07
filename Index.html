@@ -1,0 +1,43 @@
+<script>
+async function download() {
+
+    let input = document.getElementById("instaInput").value.trim();
+    let loading = document.getElementById("loading");
+
+    if (input === "") {
+        alert("Please enter link!");
+        return;
+    }
+
+    // Only link allowed
+    if (!input.includes("instagram.com")) {
+        alert("Please paste Instagram post/reel URL only!");
+        return;
+    }
+
+    loading.style.display = "block";
+
+    let apiURL = `https://graph.facebook.com/v17.0/instagram_oembed?url=${encodeURIComponent(input)}&access_token=239195599762384|nZ7FWUxEXAMPLEKEY`;
+
+    try {
+        let res = await fetch(apiURL);
+        let data = await res.json();
+
+        loading.style.display = "none";
+
+        if (data.thumbnail_url) {
+            window.open(data.thumbnail_url, "_blank"); // image / video thumbnail
+        } else if (data.html) {
+            // Extract video from embed HTML
+            let videoUrl = data.html.match(/src="([^"]+)"/)[1];
+            window.open(videoUrl, "_blank");
+        } else {
+            alert("Unable to fetch media. Private post or error.");
+        }
+
+    } catch (error) {
+        loading.style.display = "none";
+        alert("API failed! Instagram link may be private or token expired.");
+    }
+}
+</script>
